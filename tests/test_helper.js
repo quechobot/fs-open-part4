@@ -1,4 +1,4 @@
-const Blog = require('.../models/blog')
+const Blog = require('../models/blog')
 const initialBlogs = [
     {
         title: "Percepciones sobre la Enseñanza de la Facultad en Ciencias de la Computación",
