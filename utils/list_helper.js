@@ -10,19 +10,15 @@ const totalLikes = (blogs) => {
   return likes
 }
 
+const favoriteBlog = (blogs) => {
+    const mostLikedBLog = _.maxBy(blogs, 'likes')
+    return {'title':mostLikedBLog['title'], 'author': mostLikedBLog['author'], 'likes':mostLikedBLog['likes']}
+}
+
 const mostBlogs = (blogs) => {
-    const authors = (_.uniqBy(blogs, 'author')).map( blog => blog.author)
     const blogsByAuthor = _.countBy(blogs,'author')
-    let maxBlogger = {author:undefined, blogs:0};
-    authors.forEach( author => {
-        let blogsByAuthor = blogs.filter(blog=>{
-            return blog.author === author
-        }).length
-        if(blogsByAuthor > maxBlogger.blogs ){
-            maxBlogger= {author: author, blogs: blogsByAuthor}
-        }
-    })
-    return maxBlogger
+    const maxBlogger =  blogsByAuthor.length !== 0 ? _.maxBy(_.toPairs(blogsByAuthor), ([clave, valor]) => valor) : ["no data", 0]
+    return {'author': maxBlogger[0], 'blogs': maxBlogger[1]}
 }
 
 const mostLikes = (blogs) => {
@@ -42,6 +38,7 @@ const mostLikes = (blogs) => {
 module.exports = {
     dummy,
     totalLikes,
+    favoriteBlog,
     mostLikes,
     mostBlogs
 }
