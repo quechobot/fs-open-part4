@@ -51,6 +51,25 @@ test('missing like in request post 0 likes', async () => {
     const blog = blogs.filter(blog => blog.title === newBlog.title)
     expect(blog[0].likes).toBe(0)
 })
+test('a blog without title, url response bad request', async () => {
+    const newBlogNoUrl = {
+        title: "React patterns",
+        author: "Michael Chan",
+        likes: 7
+    }
+    await api.post('/api/blogs').send(newBlogNoUrl).expect(400)
+    const newBlogNoTitle = {
+        author: "Michael Chan",
+        url: "https://reactpatterns.com/",
+        likes: 7
+    }
+    await api.post('/api/blogs').send(newBlogNoTitle).expect(400)
+    const newBlog = {
+        author: "Michael Chan",
+        likes: 7
+    }
+    await api.post('/api/blogs').send(newBlog).expect(400)
+})
 afterAll(() => {
     mongoose.connection.close()
 })
