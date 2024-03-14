@@ -38,6 +38,19 @@ test('a valid blog can be added', async () => {
     const contents = blogs.map(n => n.title)
     expect(contents).toContain('React patterns')
 })
+
+test('missing like in request post 0 likes', async () => {
+    const newBlog = {
+        title: "React patterns",
+        author: "Michael Chan",
+        url: "https://reactpatterns.com/",
+    }
+    await api.post('/api/blogs').send(newBlog).expect(201)
+        .expect('Content-Type', /application\/json/)
+    const blogs = await helper.blogsInDb()
+    const blog = blogs.filter(blog => blog.title === newBlog.title)
+    expect(blog[0].likes).toBe(0)
+})
 afterAll(() => {
     mongoose.connection.close()
 })
