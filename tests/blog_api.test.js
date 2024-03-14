@@ -70,6 +70,34 @@ test('a blog without title, url response bad request', async () => {
     }
     await api.post('/api/blogs').send(newBlog).expect(400)
 })
+
+describe('deletion of a note', () => {
+    test('succeeds with status code 204 if id is valid', async () => {
+        const blogsAtStart = await helper.blogsInDb()
+        const blogToDelete = blogsAtStart[0]
+        await api
+            .delete(`/api/blogs/${blogToDelete.id}`)
+            .expect(204)
+        const blogsAtEnd = await helper.blogsInDb()
+        expect(blogsAtEnd).toHaveLength(
+            helper.initialBlogs.length - 1
+        )
+    })
+})
+
+describe('update of a note', () => {
+    test('succeeds with status code 201 when update likes +1', async () => {
+        const blogsAtStart = await helper.blogsInDb()
+        const blogToUpdate = blogsAtStart[0]
+        const updateBody = {
+            likes: blogToUpdate.likes+1
+        }
+        await api.put(`/api/blogs/${blogToUpdate.id}`).send(updateBody).expect(201)
+        const blogsAtEnd = await helper.blogsInDb()
+        const updatedBlog = blogsAtEnd[0]
+        expect(updatedBlog.likes).toBe(blogToUpdate.likes+1)
+    })
+})
 afterAll(() => {
     mongoose.connection.close()
 })
