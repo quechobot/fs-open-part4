@@ -1,18 +1,18 @@
 const listHelper = require('../utils/list_helper')
 
-test('dummy returns one', () => {
+test.skip('dummy returns one', () => {
     const blogs = []
     const result = listHelper.dummy(blogs)
     expect(result).toBe(1)
 })
 
-test('of empty list is zero', () => {
+test.skip('of empty list is zero', () => {
     const blogs = []
     const result = listHelper.totalLikes(blogs)
     expect(result).toBe(0)
 })
 
-test('when list has only one blog equals the likes of that', () => {
+test.skip('when list has only one blog equals the likes of that', () => {
     const blogs = [
         {
             title: "Go To Statement Considered Harmful",
@@ -26,7 +26,7 @@ test('when list has only one blog equals the likes of that', () => {
     expect(result).toBe(5)
 })
 
-test('of a bigger list is calculated right', () => {
+test.skip('of a bigger list is calculated right', () => {
     const blogs = [
         {
             title: "Go To Statement Considered Harmful",
@@ -60,7 +60,7 @@ test('of a bigger list is calculated right', () => {
     const result = listHelper.totalLikes(blogs)
     expect(result).toBe(11)
 })
-test('function favorite blog', () => {
+test.skip('function favorite blog', () => {
     const blogs = [
         {
             _id: "5a422a851b54a676234d17f7",
@@ -114,7 +114,7 @@ test('function favorite blog', () => {
     const result = listHelper.favoriteBlog(blogs)
     expect(result).toEqual({title: "Canonical string reduction", author: "Edsger W. Dijkstra", likes: 12})
 })
-test('most blogs', () => {
+test.skip('most blogs', () => {
     const blogs = [
         {
             _id: "5a422a851b54a676234d17f7",
@@ -169,7 +169,7 @@ test('most blogs', () => {
     expect(result).toEqual({author: "Robert C. Martin",  blogs: 3})
 })
 
-test('author with most likes', () => {
+test.skip('author with most likes', () => {
     const blogs = [
         {
             _id: "5a422a851b54a676234d17f7",

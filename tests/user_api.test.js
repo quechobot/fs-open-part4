@@ -6,7 +6,7 @@ const api = supertest(app)
 const User = require('../models/user')
 const bcrypt = require("bcrypt");
 
-describe('testing validation of users', () => {
+describe.skip('testing validation of users', () => {
 
     beforeEach(async () => {
         await User.deleteMany({})

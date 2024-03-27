@@ -25,7 +25,7 @@ const initialUsers = [
     {
         username: "quechobot",
         name: "Cristopher",
-        password: "lokijuhy"
+        password: "test"
     },
     {
         username: "molote",
